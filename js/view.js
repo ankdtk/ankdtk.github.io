@@ -113,11 +113,5 @@ function move(index) {
 }
 
 function validate(index) {
-    console.log("------------------")
-    console.log("I      = " + index)
-    console.log("C      = " + current)
-    console.log("I < M  ? " + (index < max))
-    console.log("I >= 0 ? " + (index >= 0))
-    console.log("------------------")
     return index < max && index >= 0;
 }
