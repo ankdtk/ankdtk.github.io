@@ -1,0 +1,24 @@
+#joke {
+    font-size: 16px;
+    text-align: left;
+    overflow: auto;
+    height: 50vh;
+}
+
+.mdl-card {
+    width: 50%;
+    height: 50%;
+    display: table-cell;
+}
+
+.mdl-card * {
+    display: inline-block;
+}
+
+.mdl-textfield * {
+    text-align: center !important;
+}
+
+.mdl-card__actions {
+    overflow: hidden;
+}

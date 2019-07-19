@@ -1,0 +1,27 @@
+.mdl-layout__header-row,
+.mdl-layout__header-row * {
+	color: white !important;
+}
+
+.mdl-layout__header-row .mdl-navigation__link:hover {
+	background-color: #FB8C00;
+}
+
+.mdl-layout__drawer-button {
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+	color: white !important;
+}
+
+.mdl-layout__drawer-button:hover {
+	background-color: #FB8C00 !important;
+}
+
+.mdl-layout__drawer-button:focus,
+.mdl-layout__drawer-button:hover:focus {
+	background-color: #F57C00 !important;
+}
+
+.mdl-layout__drawer-button:active, .mdl-layout__drawer-button:focus {
+	outline: none !important;
+}
