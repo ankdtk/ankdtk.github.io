@@ -19,6 +19,13 @@ function onLoad() {
         document.getElementById("forcat").style.visibility = 'hidden';
         showRandomJoke();
     } else {
+        let cookie = getCookieValue('current');
+        if(cookie != null) {
+            let json = JSON.parse(cookie);
+            if(json.hasOwnProperty(id)){
+                current = json[id];
+            }
+        }
         $.getJSON("jokes.json", function(data) {
             let i = 0;
             for(let key in data) {
@@ -51,6 +58,26 @@ function getParameterByName(name) {
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
 
+function getCookieValue(key) {
+    let results = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    if(results) {
+        return (unescape(results[2]));
+    } else {
+        return null;
+    }
+}
+
+function writeCookie() {
+    let currentCookie = getCookieValue("current");
+    if(currentCookie == null) {
+        document.cookie = 'current={"' + id + '":"' + current + '"};expires=21/08/2991 00:00:00';
+    } else {
+        let data = JSON.parse(currentCookie);
+        data[id] = current;
+        document.cookie = "current=" + JSON.stringify(data) + ";expires=21/08/2991 00:00:00";
+    }
+}
+
 function updateJoke() {
     let jokeElement = document.getElementById("joke");
 
@@ -63,6 +90,7 @@ function updateJoke() {
         let joke = data[title][current];
         jokeElement.innerHTML = new DOMParser().parseFromString(joke, "text/html").documentElement.textContent;
         document.getElementById("counter").innerHTML = (current + 1) + "/" + max;
+        writeCookie();
     }).fail(function () {
         jokeElement.innerHTML = "Ошибка при загрузке";
     });
@@ -76,7 +104,6 @@ function showRandomJoke() {
         for(let key in data) {
             i++;
             if(i != cat) {
-                console.log("nc")
                 continue;
             }
             let num = Math.floor(Math.random() * data[key].length);
