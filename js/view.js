@@ -9,7 +9,8 @@ function onLoad() {
 		id = category;
     }
     let index = getParameterByName('index');
-	if(typeof index != "undefined" && index != "" && index != null && index != "null") {
+    var indexSet = typeof index != "undefined" && index != "" && index != null && index != "null";
+	if(indexSet) {
         current = index-1;
     }
     var titleElement = document.getElementById("categoryTitle");
@@ -19,11 +20,13 @@ function onLoad() {
         document.getElementById("forcat").style.visibility = 'hidden';
         showRandomJoke();
     } else {
-        let cookie = getCookieValue('current');
-        if(cookie != null) {
-            let json = JSON.parse(cookie);
-            if(json.hasOwnProperty(id)){
-                current = json[id];
+        if(!indexSet) {
+            let cookie = getCookieValue('current');
+            if(cookie != null) {
+                let json = JSON.parse(cookie);
+                if(json.hasOwnProperty(id)){
+                    current = json[id];
+                }
             }
         }
         $.getJSON("jokes.json", function(data) {
